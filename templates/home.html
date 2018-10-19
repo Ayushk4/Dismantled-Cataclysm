@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta name="description" content="A complete disaster management facility">
+    <meta name="keywords" content="CodeFunDo++,Microsoft,Disaster,Disaster Management,IIT Kharagpur,MeeSeeks,MeSeeks">
+    <meta name="author" content="Prashant Ramnani, Ayush Kaushal, Chinmoy Singh">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MeeSeeks</title>
+    <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style.css')}}">
+   
+</head>
+<body>
+    <style>
+        .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+</style>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openNoticeBoard(event, 'Victim')">Victim</button>
+        <button class="tablinks" onclick="openNoticeBoard(event, 'Volunteer')">Volunteer</button>
+    </div>
+
+    <div id="Victim" class="tabcontent">
+        <h3>Victim</h3>
+        <p></p> 
+    </div>
+
+    <div id="Volunteer" class="tabcontent">
+        <h3>Volnuteer</h3>
+        <p></p> 
+    </div>
+
+    <script>
+        function openNoticeBoard(evt, boardName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(boardName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        //openNoticeBoars("loadPage","Victim");
+        </script>
+</body>
+</html>
