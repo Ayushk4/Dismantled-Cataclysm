@@ -75,40 +75,48 @@ def homeassign():
     
     data_array_vol, data_array_vic = get_data()
 
-    vic_id_being_assigned = ''
+    vic_id_being_assigned = ""
+    vol_code = ""
     for i in data_array_vic:
         try:
             vol_code = request.form[i["id"]]
-
+            vic_id_being_assigned = i["id"]
         except:
             continue
-
-        vic_id_being_assigned = i["id"]
-
-        new_vic = {}
-        with open ("data/victim.json","r") as read_f:
-            new_vic = json.load( read_f)
-
-        new_vic[vic_id_being_assigned]["status"] = "Assigned to " + vol_code
-        new_vic[vic_id_being_assigned]["alloted_to"] = vol_code
-
-        with open ("data/victim.json","w") as wri:
-            json.dump(new_vic,wri)
-
         break
 
-    if vol_code == "" :
+    print(vic_id_being_assigned)
+    print("esdgsd")
+   # print(vol_code)
+
+    
+    if vol_code != "" :
         for i in data_array_vol:
-            if i["ids"] == vol_code:
-                i["alloted"].append()
+            if i["id"] == vol_code:
+                i["alloted"].append(vic_id_being_assigned)
                 new_vol = {}
                 with open ("data/volunteer.json","r") as read_f:
                     new_vol = json.load( read_f)
 
-                new_vol[i["ids"]]["data"]["append"] = i["allotted"]
+                new_vol[i["id"]]["alloted"] = i["alloted"]
                 
                 with open ("data/volunteer.json","w") as wri:
                     json.dump(new_vol,wri)
+
+
+                #vic_id_being_assigned = i["id"]
+
+                new_vic = {}
+                with open ("data/victim.json","r") as read_f:
+                    new_vic = json.load( read_f)
+                print(new_vic)
+                print(new_vic[vic_id_being_assigned])
+                
+                new_vic[vic_id_being_assigned]["status"] = "Assigned to " + str(vol_code)
+                new_vic[vic_id_being_assigned]["alloted_to"] = vol_code
+
+                with open ("data/victim.json","w") as wri:
+                    json.dump(new_vic,wri)
 
     data_array_vol, data_array_vic = get_data()
     return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
