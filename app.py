@@ -20,13 +20,17 @@ def get_data():
     #print(data_array_vic)
     return data_array_vic
 
+@app.route('/', methods=['GET'])
+@app.route('/home', methods=['GET'])
+def home():
+    data_array_vic = get_data()
+    return render_template("home.html", data_array_vic = data_array_vic)
 
-@app.route('/', methods=['GET','POST'])
-def homePage():
-    if request.method == 'POST':
-        #CHECK FOR NULL DATA
-        new_data = request.form.get('victim_form')
-        print(new_data)
+@app.route('/home', methods = ['POST'])
+def homeSubmit():
+    print("\n\n\nasfsdgds\n\n")
+    new_data = request.form['victim_form']
+    print(new_data)
 
     data_array_vic = get_data()
     return render_template("home.html", data_array_vic = data_array_vic)
