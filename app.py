@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request,url_for
 import json
 app = Flask(__name__)
+from spacyyy import spacyy
 
 
 def get_data():
@@ -32,7 +33,26 @@ def homeSubmit():
     new_data = request.form['victim_form']
     print(new_data)
 
+    name, activity, donation, add = spacyy(new_data)
+
+    new_id = {}
+    new_id["vic" + str(i)] = {}
+    new_id["vic" + str(i)]["data"] = {}
+    new_id["vic" + str(i)]["data"]["name"] = name
+    new_id["vic" + str(i)]["data"]["ailment"] = activity
+    new_id["vic" + str(i)]["data"]["location"] = add
+
+    data_vic = {}
+    with open ("data/victim.json","r") as read_f:
+        data_vic = json.load(read_f)
+
+    data_vic["vic" + str(i)] = new_id["vic" + str(i)]
+
+    with open("data/victim.json","w") as w:
+        json.dump(data_vic,w)
+
     data_array_vic = get_data()
+
     return render_template("home.html", data_array_vic = data_array_vic)
 
 @app.errorhandler(404)
@@ -40,6 +60,7 @@ def pageNotFound(e):
     return ("Page Does Not Exist")
 
 if __name__ == "__main__":
+    i=4
     app.run(debug=True)
-
+    
 #get_data()

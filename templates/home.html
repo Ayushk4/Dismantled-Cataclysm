@@ -34,8 +34,6 @@
             <tr>
                 <th>id</th>
                 <th>data</th> 
-                <th>alloted_to</th>
-                <th>status</th>
             </tr>
 
             {% for single_vic in data_array_vic %}
@@ -43,8 +41,6 @@
             <tr>
                 <td align="center">{{single_vic["id"]}}</td>
                 <td align="center">{{single_vic["data"]}}</td> 
-                <td align="center">{{single_vic["alloted_to"]}}</td>
-                <td align="center">{{single_vic["status"]}}</td>
             </tr>
 
             {% endfor %}

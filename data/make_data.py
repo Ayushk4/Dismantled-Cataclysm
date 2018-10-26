@@ -2,17 +2,17 @@ import json
 
 data = {
     "vic1" : {
-        "data" : {"name" : "vic1_name"},
+        "data" : {"name" : "Nani", "location" : "IIT Kgp near MMM hall canteen", "ailment" : "broken leg"},
         "status" : 0,
         "alloted_to" : -1
     },
     "vic2" : {
-        "data" : {"name" : "vic2_name"},
+        "data" : {"name" : "Chinmoy", "location" : "Kharapur, near Dominoes", "ailment" : "Fell"},
         "status" : 0,
         "alloted_to" : -1
     },
     "vic3" : {
-        "data" : {"name" : "vic3_name"},
+        "data" : {"name" : "Apoorve", "location" : "Kharagpur city, near railway station", "ailment" : "lack of food supply"},
         "status" : 0,
         "alloted_to" : -1
     }
