@@ -42,19 +42,48 @@
             <tr>
                 <td align="center">{{single_vic["id"]}}</td>
                 <td align="center">{{single_vic["data"]}}</td> 
-                <td align="center">{{single_vic["alloted_to"]}}</td>
-                <td align="center">{{single_vic["status"]}}</td>
+                {% if single_vic["alloted_to"] == -1 %}
+                <td align="center">Not assigned
+                <form action="{{url_for('homeSubmit')}}" id="volun_code_form">
+                    Enter volunteers code:<br>
+                    <input type="text" name={{single_vic["id"]}} value="">
+                    <input type="Submit" value=Upload>
+                </form>
+                </td>
+                {% else %}
+                    <td align="center">{{single_vic["alloted_to"]}}</td>
+                    <td align="center">{{single_vic["status"]}}</td>
+                    {% endif %}
             </tr>
-
             {% endfor %}
-
         </table>
-
     </div>
 
     <div id="Volunteer" class="tabcontent">
         <h3>Volnuteer</h3>
-        <p></p> 
+        <p></p>
+        
+        
+
+        <table style="width:100%" style="border:1px solid black">
+
+            <tr>
+                <th>id</th>
+                <th>data</th> 
+                <th>alloted</th>
+            </tr>
+
+            {% for single_vol in data_array_vol%}
+
+            <tr>
+                <td align="center">{{single_vol["id"]}}</td>
+                <td align="center">{{single_vol["data"]}}</td> 
+                <td align="center">{{single_vol["alloted"]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
     </div>
 
     <script>

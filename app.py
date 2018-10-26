@@ -28,13 +28,26 @@ def get_data():
         data_vic[keys]["id"] = keys
         data_array_vic.append(data_vic[keys])
 
-    return data_array_vic
+    data_vol = {}
+    with open ("data/volunteer.json","r") as read_f:
+        data_vol = json.load( read_f)
+
+    vol_ids = data_vol.keys()
+    data_array_vol = []
+
+    for keys in vol_ids:
+        data_vol[keys]["id"] = keys
+        data_array_vol.append(data_vol[keys])
+
+
+
+    return data_array_vol, data_array_vic
 
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
 def home():
-    data_array_vic = get_data()
-    return render_template("home.html", data_array_vic = data_array_vic)
+    data_array_vol, data_array_vic = get_data()
+    return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
 
 @app.route('/home', methods = ['POST'])
 def homeSubmit():
@@ -51,8 +64,8 @@ def homeSubmit():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        data_array_vic = get_data()
-        return render_template("home.html", data_array_vic = data_array_vic)
+        data_array_vol, data_array_vic = get_data()
+        return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
 
 
     #    flash('Success')
@@ -61,8 +74,34 @@ def homeSubmit():
     #new_data = request.form['victim_form']
     #print(new_data)
     else:
-        data_array_vic = get_data()
-        return render_template("home.html", data_array_vic = data_array_vic)
+        data_array_vol, data_array_vic = get_data()
+        return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
+
+
+
+@app.route('/homeaddvol', methods = ['POST'])
+def homeaddvol():
+    vol_code = request.form["volun_code"]
+    data_array_vol, data_array_vic = get_data()
+    print(request.form)
+
+    volid_found == -1
+
+    for i in data_array_vol:
+        if i["ids"] == vol_code:
+            i["alloted"].append()
+            new_vol = {}
+            with open ("data/volunteer.json","r") as read_f:
+                new_vol = json.load( read_f)
+
+            new_vol[i["ids"]]["data"]["append"] = i["allotted"]
+            
+            with open ("data/volunteer.json","w") as wri:
+                json.dump(new_vol,wri)
+
+    data_array_vol, data_array_vic = get_data()
+    return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
+
 
 @app.errorhandler(404)
 def pageNotFound(e):
