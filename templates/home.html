@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MeeSeeks</title>
     <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style.css')}}">
-   
+
 </head>
 <body>
 
@@ -20,7 +20,35 @@
 
     <div id="Victim" class="tabcontent">
         <h3>Victim</h3>
-        <p></p> 
+        <p></p>
+
+        <form id="victim_form_form" method="POST">
+            Input <input type="text" name="victim_form"><br>
+            <input type="button" value="Submit"><!--onclick="myFunction()"-->
+        </form>
+
+        <table style="width:100%" style="border:1px solid black">
+
+            <tr>
+                <th>id</th>
+                <th>data</th> 
+                <th>alloted_to</th>
+                <th>status</th>
+            </tr>
+
+            {% for single_vic in data_array_vic %}
+
+            <tr>
+                <td>{{single_vic["id"]}}</td>
+                <td>{{single_vic["data"]}}</td> 
+                <td>{{single_vic["alloted_to"]}}</td>
+                <td>{{single_vic["status"]}}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
     </div>
 
     <div id="Volunteer" class="tabcontent">
@@ -46,3 +74,5 @@
         </script>
 </body>
 </html>
+<!--
+-->
