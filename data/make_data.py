@@ -15,7 +15,7 @@ data = {
         "data" : {"name" : "Apoorve", "location" : "Kharagpur city, near railway station", "ailment" : "lack of food supply"},
         "status" : "Unanswered",
         "alloted_to" : "None"
-    }
+   }
 }
 
 with open("victim.json", "w") as write_file:
