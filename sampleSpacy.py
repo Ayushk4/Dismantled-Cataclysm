@@ -51,4 +51,12 @@ def spacy_data(docu):
 		if k.label_ == 'PERSON':
 			name.append(k.text)
 
-	return (name,ailment,donation,address,people)
+	modified_add = []
+
+	for k in address:
+		modified_add.append(str(k))
+
+	for k in address and people:
+		address.remove(k)
+
+	return (name,ailment,donation,modified_add,people)

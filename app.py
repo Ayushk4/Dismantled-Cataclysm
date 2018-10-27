@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.utils import secure_filename
 import json
 import os
+
 from sampleSpacy import spacy_data
 
 app = Flask(__name__)
@@ -20,8 +21,13 @@ def get_data():
         data_vic[keys]["id"] = keys
         data_array_vic.append(data_vic[keys])
 
+    f=open("data/volunteer.json", "r")
+    if f.mode == 'r':
+        contents = f.read()
+        print(contents)
+    
     data_vol = {}
-    with open ("data/volunteer.json","r") as read_f:
+    with open ("data/volunteer.json","r") as read_f:    
         data_vol = json.load(read_f)
 
     vol_ids = data_vol.keys()
@@ -94,8 +100,6 @@ def homeassign():
     data_array_vol, data_array_vic = get_data()
     return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
 
-
-
 @app.route('/homeSubmitVictim', methods = ['POST'])
 def homeSubmitVictim():
     
@@ -105,25 +109,44 @@ def homeSubmitVictim():
 
     data_array_vol, data_array_vic = get_data()
     i = len(data_array_vic) +1
-
+    name = []
+    activity =[]
+    donation =[]
+    add = []
+    number_of_people = []
     name, activity, donation, add, number_of_people= spacy_data(new_data)
 
     new_id = {}
     new_id["vic" + str(i)] = {}
     new_id["vic" + str(i)]["data"] = {}
-    new_id["vic" + str(i)]["data"]["name"] = name
-    new_id["vic" + str(i)]["data"]["ailment"] = activity
-    new_id["vic" + str(i)]["data"]["location"] = add
-    new_id["vic" + str(i)]["data"]["no of people"] = number_of_people
+    count =0
+    if len(name) >0:
+        new_id["vic" + str(i)]["data"]["name"] = name
+        count+=1
+    if len(activity) >0:
+        new_id["vic" + str(i)]["data"]["ailment"] = activity
+        count+=1
+    if len(add) >0:
+        strr='.'
+        while strr in add:
+            add.remove(strr)
+        new_id["vic" + str(i)]["data"]["location"] = list(set(add))
+        count+=1
+
+    if len(number_of_people) >0:
+        count+=1
+        new_id["vic" + str(i)]["data"]["no of people"] = number_of_people
+    
+    if count == 0 :
+        new_id["vic" + str(i)]["data"]["Undetected_text"] = new_data
     new_id["vic" + str(i)]["status"] = "Unanswered"
     new_id["vic" + str(i)]["alloted_to"] = "None"
 
-    print("\n\n\adsafsafasfasfasfasfasfasfsa\n\n")
     data_vic = {}
     with open ("data/victim.json","r") as read_f:
         data_vic = json.load(read_f)
     data_vic["vic" + str(i)] = new_id["vic" + str(i)]
-    print(data_vic)
+
 
     with open("data/victim.json","w") as w:
         json.dump(data_vic,w)
@@ -147,10 +170,27 @@ def homeSubmitVolunteer():
     new_id = {}
     new_id["vol" + str(i)] = {}
     new_id["vol" + str(i)]["data"] = {}
-    new_id["vol" + str(i)]["data"]["name"] = name
-    new_id["vol" + str(i)]["data"]["donation"] = donation
-    new_id["vol" + str(i)]["data"]["location"] = add
-    new_id["vol" + str(i)]["data"]["number of people"] = number_people
+
+    count = 0
+    if len(name) >0:
+        count+=1
+        new_id["vol" + str(i)]["data"]["name"] = name
+    if len(donation) >0:
+        count +=1
+        new_id["vol" + str(i)]["data"]["donation"] = donation
+    if len(add) >0:
+        strr='.'
+        while strr in add:
+            add.remove(strr)
+        if len(add) >0:
+            new_id["vol" + str(i)]["data"]["location"] = list(set(add))
+    if len(number_people) >0:
+        count +=1
+        new_id["vol" + str(i)]["data"]["number of people"] = number_people
+
+    if count == 0 :
+        new_id["vol" + str(i)]["data"]["Undetected_text"] = new_data
+
     new_id["vol" + str(i)]["alloted"] = []
     new_id["vol" + str(i)]["alloted_to"] = "None"
 
