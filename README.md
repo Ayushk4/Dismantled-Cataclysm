@@ -2,10 +2,10 @@
 
 AI driven call center facility for disaster management using NLP.
 
-### installation guide
+### Installation guide
 
 * `pip install flask`
 
-### running the app
+### Running the app
 
 * `python3 app.py`
