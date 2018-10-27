@@ -1,1 +1,1 @@
-{"vol1": {"data": {"name": "volunteer1"}, "alloted": ["vic1", "vic2"]}, "vol2": {"data": {"name": "volunteer2"}, "alloted": ["vic3"]}, "vol3": {"data": {"name": "volunteer3"}, "alloted": []}}
+{"vol1": {"data": {"name": "volunteer1"}, "alloted": ["vic1", "vic3"]}, "vol2": {"data": {"name": "volunteer2"}, "alloted": []}, "vol3": {"data": {"name": "volunteer3"}, "alloted": ["vic2"]}}

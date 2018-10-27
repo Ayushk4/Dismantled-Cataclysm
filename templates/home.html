@@ -22,12 +22,15 @@
         <h1 align=center>Victims</h1>
         <p></p>
 
+        <form align=center action="{{url_for('homeSubmitVictim')}}" id=" victim_form_form" method="POST" >
+              <p style = "font-size: 50px;">  Input : 
+              <textarea name='victim_form' id='input' style="width:1000px; height: 50px;"></textarea><br />
+               
+                <input type="Submit"><!--onclick="myFunction()"-->
+            </p>
+            </form>
 
-        <form action="{{url_for('home')}}" id="victim_form_form" enctype=multipart/form-data method="POST" >
-            <input type=file name=file>
-            <input type="Submit" value=Upload><!--onclick="myFunction()"-->
-        </form>
-        <br><br><br>
+        <br>
         <table style="width:100%" style="border:1px solid black">
 
             <tr>
@@ -61,10 +64,18 @@
     </div>
 
     <div id="Volunteer" class="tabcontent">
-        <h2 <h1 align=center>Volunteers</h2>
+         <h1 align=center>Volunteers</h1>
         <p></p>
         
-        
+        <form align=center action="{{url_for('homeSubmitVolunteer')}}" id=" volunteer_form_form" method="POST" >
+                <p style = "font-size: 50px;">  Input : 
+                <textarea name='volunteer_form' id='input' style="width:1000px; height: 50px;"></textarea><br />
+                 
+                  <input type="Submit"><!--onclick="myFunction()"-->
+              </p>
+              </form>
+  
+          <br>
 
         <table style="width:100%" style="border:1px solid black">
 

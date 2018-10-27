@@ -9,9 +9,9 @@ app = Flask(__name__)
 
 def get_data():
     data_vic = {}
+    with open ("data/victim.json","r") as read_f:
+        data_vic = json.load(read_f)
 
-    with open ("data/victim.json","r") as r:
-        data_vic = json.load(r)
     print(data_vic)
     vic_ids = data_vic.keys()
     data_array_vic = []
@@ -22,7 +22,7 @@ def get_data():
 
     data_vol = {}
     with open ("data/volunteer.json","r") as read_f:
-        data_vol = json.load(read_f)
+        data_vol = json.load( read_f)
 
     vol_ids = data_vol.keys()
     data_array_vol = []
@@ -96,74 +96,74 @@ def homeassign():
 
 
 
-@app.route('/homeSubmitVictim', methods = ['POST'])
-def homeSubmitVictim():
+# @app.route('/homeSubmitVictim', methods = ['POST'])
+# def homeSubmitVictim():
     
-    new_data = request.form['victim_form']
-    #print("\n\n\nasfsdgds\n\n")
-    #print(new_data)
+#     new_data = request.form['victim_form']
+#     #print("\n\n\nasfsdgds\n\n")
+#     print(new_data)
 
-    data_array_vol, data_array_vic = get_data()
-    i = len(data_array_vic) +1
+#     data_array_vol, data_array_vic = get_data()
+#     i = len(data_array_vic)
 
-    name, activity, donation, add, number_of_people= spacy_data(new_data)
+#     name, activity, donation, add, number_of_people= spacy_data(new_data)
 
-    new_id = {}
-    new_id["vic" + str(i)] = {}
-    new_id["vic" + str(i)]["data"] = {}
-    new_id["vic" + str(i)]["data"]["name"] = name
-    new_id["vic" + str(i)]["data"]["ailment"] = activity
-    new_id["vic" + str(i)]["data"]["location"] = add
-    new_id["vic" + str(i)]["data"]["no of people"] = number_of_people
-    new_id["vic" + str(i)]["status"] = "Unanswered"
-    new_id["vic" + str(i)]["alloted_to"] = "None"
+#     new_id = {}
+#     new_id["vic" + str(i)] = {}
+#     new_id["vic" + str(i)]["data"] = {}
+#     new_id["vic" + str(i)]["data"]["name"] = name
+#     new_id["vic" + str(i)]["data"]["ailment"] = activity
+#     new_id["vic" + str(i)]["data"]["location"] = add
+#     new_id["vic" + str(i)]["data"]["no of people"] = number_of_people
+#     new_id["vic" + str(i)]["status"] = "Unanswered"
+#     new_id["vic" + str(i)]["alloted_to"] = "None"
 
-    print("\n\n\adsafsafasfasfasfasfasfasfsa\n\n")
-    data_vic = {}
-    with open ("data/victim.json","r") as read_f:
-        data_vic = json.load(read_f)
-    data_vic["vic" + str(i)] = new_id["vic" + str(i)]
-    print(data_vic)
+#     print(new_id)    
 
-    with open("data/victim.json","w") as w:
-        json.dump(data_vic,w)
+#     data_vic = {}
+#     with open ("data/victim.json","r") as read_f:
+#         data_vic = json.load(read_f)
+#     data_vic["vic" + str(i)] = new_id["vic" + str(i)]
+#     print(data_vic)
+#     with open("data/victim.json","w") as w:
+#         json.dump(data_vic,w)
 
-    data_array_vol, data_array_vic = get_data()
-    return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
+#     data_array_vol, data_array_vic = get_data()
+#     return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
 
 
-@app.route('/homeSubmitVolunteer', methods = ['POST'])
-def homeSubmitVolunteer():
+# @app.route('/homeSubmitVolunteer', methods = ['POST'])
+# def homeSubmitVolunteer():
     
-    new_data = request.form['volunteer_form']
-    #print("\n\n\nasfsdgds\n\n")
-    print(new_data)
+#     new_data = request.form['volunteer_form']
+#     #print("\n\n\nasfsdgds\n\n")
+#     print(new_data)
 
-    data_array_vol, data_array_vic = get_data()
-    i = len(data_array_vol) + 1
+#     data_array_vol, data_array_vic = get_data()
+#     i = len(data_array_vol)
 
-    name, activity, donation, add, number_people = spacy_data(new_data)
+#     name, activity, donation, add, number_people = spacy_data(new_data)
 
-    new_id = {}
-    new_id["vol" + str(i)] = {}
-    new_id["vol" + str(i)]["data"] = {}
-    new_id["vol" + str(i)]["data"]["name"] = name
-    new_id["vol" + str(i)]["data"]["donation"] = donation
-    new_id["vol" + str(i)]["data"]["location"] = add
-    new_id["vol" + str(i)]["data"]["number of people"] = number_people
-    new_id["vol" + str(i)]["alloted"] = []
-    new_id["vol" + str(i)]["alloted_to"] = "None"
+#     new_id = {}
+#     new_id["vol" + str(i)] = {}
+#     new_id["vol" + str(i)]["data"] = {}
+#     new_id["vol" + str(i)]["data"]["name"] = name
+#     new_id["vol" + str(i)]["data"]["donation"] = donation
+#     new_id["vol" + str(i)]["data"]["location"] = add
+#     new_id["vol" + str(i)]["data"]["number of people"] = number_people
+#     new_id["vol" + str(i)]["alloted"] = []
+#     #new_id["vol" + str(i)]["alloted_to"] = "None"
 
 
-    data_vol = {}
-    with open ("data/volunteer.json","r") as read_f:
-        data_vol = json.load(read_f)
-    data_vol["vol" + str(i)] = new_id["vol" + str(i)]
-    with open("data/volunteer.json","w") as w:
-        json.dump(data_vol,w)
+#     data_vol = {}
+#     with open ("data/volunteer.json","r") as read_f:
+#         data_vol = json.load(read_f)
+#     data_vol["vol" + str(i)] = new_id["vol" + str(i)]
+#     with open("data/volunteer.json","w") as w:
+#         json.dump(data_vol,w)
 
-    data_array_vol, data_array_vic = get_data()
-    return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
+#     data_array_vol, data_array_vic = get_data()
+#     return render_template("home.html", data_array_vic = data_array_vic, data_array_vol = data_array_vol)
 
 
 
